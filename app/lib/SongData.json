@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Guitar, Loneliness and Blue Planet",
+    "background": "#4C2633",
+    "foreground": "rgba(237, 112 ,154 ,.9)"
+  },
+  {
+    "name": "That band",
+    "background": "#0C3958",
+    "foreground": "rgba(26, 124 ,195 ,.9)"
+  },
+  {
+    "name": "If I could be a constellation",
+    "background": "#580D24",
+    "foreground": "rgba(232, 26 ,91,.9)"
+  },
+  {
+    "name": "Never forget",
+    "background": "#59420E",
+    "foreground": "rgba(247, 180 ,27 ,.9)"
+  },
+  {
+    "name": "Secret base",
+    "background": "#40292F",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Rockn' Roll, Morning Light Falls on You",
+    "background": "#40292F",
+    "foreground": "rgba(237, 112 ,154,.9)"
+  },
+  {
+    "name": "What is wrong with",
+    "background": "#59420E",
+    "foreground": "rgba(247, 180 ,27 ,.9)"
+  },
+  {
+    "name": "I can't sing a love song",
+    "background": "#40292F",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Karakara",
+    "background": "#0C3958",
+    "foreground": "rgba(26,124,195 ,.9)"
+  },
+  {
+    "name": "The Little Sea",
+    "background": "#40292F",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Seisyun Complex",
+    "background": "#4D2E2C",
+    "foreground": "rgba(21,6,37,.9)"
+  },
+  {
+    "name": "Distortion!!",
+    "background": "#580D22",
+    "foreground": "rgba(232,26,91,.9)"
+  },
+  {
+    "name": "Flashbacker",
+    "background": "#40292F",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Hitoribocchi Tokyo",
+    "background": "#4D2E2C",
+    "foreground": "rgba(21,6,37,.9)"
+  },
+  {
+    "name": "I'm the Only Ghost",
+    "background": "#40292F",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Into the Light",
+    "background": "#4E441A",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  },
+  {
+    "name": "Blue Spring and Western Sky",
+    "background": "#4E441A",
+    "foreground": "rgba(255, 255 ,255 ,.9)"
+  }
+]

@@ -3,27 +3,13 @@ import React, { ChangeEvent } from 'react'
 import { Input } from '@/app/components/ui/input'
 import { Label } from '@/app/components/ui/label'
 import { Sketch } from '@uiw/react-color'
-import {
-	ArrowUpIcon,
-	ArrowUpOnSquareIcon,
-	Cog6ToothIcon,
-} from '@heroicons/react/20/solid'
+import { ArrowUpOnSquareIcon } from '@heroicons/react/20/solid'
 import Hovertip from '@/app/components/Hovertip'
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from '@/app/components/ui/popover'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/app/components/ui/dropdown-menu'
-import { Button } from '@/app/components/ui/button'
 
 type TextFieldProps = {
 	label: string
@@ -47,7 +33,7 @@ export const TextField = ({ label, type, model }: TextFieldProps) => {
 
 export const ColorInput = ({ label, model }: TextFieldProps) => {
 	return (
-		<div className={'flex items-center justify-between px-4 py-2 text-primary'}>
+		<div className={'flex items-center justify-start gap-4 p-2 text-primary'}>
 			<Popover>
 				<PopoverTrigger>
 					<Hovertip label={'Color Input'}>
@@ -59,28 +45,6 @@ export const ColorInput = ({ label, model }: TextFieldProps) => {
 				</PopoverContent>
 			</Popover>
 			<Label className={'mx-1 text-base'}>{label}</Label>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button
-						className={
-							'bg-transparent text-primary hover:bg-primary hover:text-primary-foreground'
-						}
-					>
-						<Hovertip label={'Color Mode'}>
-							<Cog6ToothIcon className={'size-5'} />
-						</Hovertip>
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent>
-					<DropdownMenuLabel>{label} Custom</DropdownMenuLabel>
-					<DropdownMenuSeparator />
-					<DropdownMenuGroup>
-						<DropdownMenuItem>
-							<Button>Colorful </Button>
-						</DropdownMenuItem>
-					</DropdownMenuGroup>
-				</DropdownMenuContent>
-			</DropdownMenu>
 		</div>
 	)
 }
