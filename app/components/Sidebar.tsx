@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { CodeBracketIcon } from '@heroicons/react/20/solid'
+import { CodeBracketIcon, Cog6ToothIcon } from '@heroicons/react/20/solid'
 import { SidebarActions } from '@/app/components/actions'
 import { Button } from '@/app/components/ui/button'
 import { Label } from '@/app/components/ui/label'
@@ -8,7 +8,6 @@ import { useAction } from '@/app/lib/store/useAction'
 
 const Sidebar = () => {
 	const changePreset = useAction((state) => state.updateSongPreset)
-
 	return (
 		<div className={'h-full w-1/4 border-r border-primary bg-background'}>
 			<div
@@ -21,7 +20,12 @@ const Sidebar = () => {
 			</div>
 			<div className={'flex flex-col gap-4 p-4'}>
 				<SidebarActions />
-				<div>
+				<div
+					className={
+						'flex cursor-pointer items-center justify-start gap-4 p-2 text-primary'
+					}
+				>
+					<Cog6ToothIcon className={'size-6'} />
 					<Label onClick={changePreset} className={'text-md text-primary'}>
 						Change Song Preset
 					</Label>

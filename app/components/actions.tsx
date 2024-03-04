@@ -12,10 +12,10 @@ export const details = [
 		component: <UploadInput label={'Music'} type={'file'} model={'music'} />,
 	},
 	{
-		component: <ColorInput label={'Background Color'} model={'music'} />,
+		component: <ColorInput label={'Background Color'} model={'background'} />,
 	},
 	{
-		component: <ColorInput label={'Foreground Color'} model={'music'} />,
+		component: <ColorInput label={'Foreground Color'} model={'foreground'} />,
 	},
 ]
 

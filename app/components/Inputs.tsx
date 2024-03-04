@@ -10,21 +10,23 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from '@/app/components/ui/popover'
+import { useAction } from '@/app/lib/store/useAction'
 
 type TextFieldProps = {
 	label: string
-	model: string
+	model: 'name' | 'image' | 'music' | 'background' | 'foreground'
 	type?: string
 }
 
 export const TextField = ({ label, type, model }: TextFieldProps) => {
+	const changeSongDetail = useAction((state) => state.changeSongDetail)
 	return (
 		<div className={'flex flex-col gap-2 text-primary'}>
 			<Label>{label}</Label>
 			<Input
 				type={type}
 				onChange={(e) => {
-					console.log(e.target.files)
+					changeSongDetail(model, e.target.value)
 				}}
 			/>
 		</div>
@@ -32,6 +34,7 @@ export const TextField = ({ label, type, model }: TextFieldProps) => {
 }
 
 export const ColorInput = ({ label, model }: TextFieldProps) => {
+	const changeSongDetail = useAction((state) => state.changeSongDetail)
 	return (
 		<div className={'flex items-center justify-start gap-4 p-2 text-primary'}>
 			<Popover>
@@ -41,7 +44,7 @@ export const ColorInput = ({ label, model }: TextFieldProps) => {
 					</Hovertip>
 				</PopoverTrigger>
 				<PopoverContent className={'size-auto border-none p-0'}>
-					<Sketch />
+					<Sketch onChange={(e) => changeSongDetail(model, e.hex)} />
 				</PopoverContent>
 			</Popover>
 			<Label className={'mx-1 text-base'}>{label}</Label>

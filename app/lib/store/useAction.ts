@@ -24,8 +24,13 @@ export const useAction = create<Action & State>((set) => ({
 		image: `/images/${SongPreset[0].name}.jpg`,
 	},
 
-	changeSongDetail: (model, value) =>
-		set((state) => ({ songDetails: { ...state.songDetails, [model]: value } })),
+	changeSongDetail: (model, value: string) =>
+		set((state) => ({
+			songDetails: {
+				...state.songDetails,
+				[model]: value,
+			},
+		})),
 
 	updateSongPreset: () => {
 		set((state) => ({
