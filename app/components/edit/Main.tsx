@@ -43,6 +43,7 @@ const Main = () => {
 				<Image
 					width={600}
 					height={600}
+					className={'size-[600px] object-cover'}
 					src={songDetails?.image ?? ''}
 					alt={''}
 				/>

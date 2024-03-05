@@ -6,7 +6,7 @@ export const details = [
 		component: <TextField label={'Name'} type={'string'} model={'name'} />,
 	},
 	{
-		component: <UploadInput label={'Picture'} model={'picture'} />,
+		component: <UploadInput label={'Picture'} model={'image'} />,
 	},
 	{
 		component: <UploadInput label={'Music'} type={'file'} model={'music'} />,

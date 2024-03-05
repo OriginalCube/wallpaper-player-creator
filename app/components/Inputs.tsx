@@ -53,6 +53,7 @@ export const ColorInput = ({ label, model }: TextFieldProps) => {
 }
 
 export const UploadInput = ({ label, model }: TextFieldProps) => {
+	const changeSongDetail = useAction((state) => state.changeSongDetail)
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
@@ -60,7 +61,7 @@ export const UploadInput = ({ label, model }: TextFieldProps) => {
 			reader.onloadend = () => {
 				const base64String = reader.result?.toString().split(',')[1]
 				if (base64String) {
-					console.log(base64String)
+					changeSongDetail(model, `data:image/webp;base64,${base64String}`)
 				}
 			}
 			reader.readAsDataURL(file)
