@@ -25,6 +25,7 @@ export const TextField = ({ label, type, model }: TextFieldProps) => {
 			<Label>{label}</Label>
 			<Input
 				type={type}
+				required
 				onChange={(e) => {
 					changeSongDetail(model, e.target.value)
 				}}
@@ -74,7 +75,11 @@ export const UploadInput = ({ label, model, type }: TextFieldProps) => {
 	return (
 		<div className={'flex flex-col gap-2 text-primary'}>
 			<Label>{label}</Label>
-			<Input type={'file'} onChange={(e) => handleFileInputChange(e)} />{' '}
+			<Input
+				type={'file'}
+				onChange={(e) => handleFileInputChange(e)}
+				required
+			/>{' '}
 		</div>
 	)
 }

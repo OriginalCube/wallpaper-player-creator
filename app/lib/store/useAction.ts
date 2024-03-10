@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import SongPreset from '@/app/lib/SongData.json'
 
-type State = {
+export type State = {
 	songDetails: {
 		name: string
 		image?: string

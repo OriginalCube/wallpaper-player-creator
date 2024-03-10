@@ -3,31 +3,30 @@ import { CodeBracketIcon, Cog6ToothIcon } from '@heroicons/react/20/solid'
 import { SidebarActions } from '@/app/components/actions'
 import { Label } from '@/app/components/ui/label'
 import { useAction } from '@/app/lib/store/useAction'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTrigger,
-} from '@/app/components/ui/dialog'
 import { Button } from '@/app/components/ui/button'
-import { toast } from 'sonner'
-import { useEffect } from 'react'
-import { Simulate } from 'react-dom/test-utils'
+import Details from '@/app/components/Details'
+import { useState } from 'react'
 
 const Sidebar = () => {
+	const [dialog, setDialog] = useState(false)
 	const changePreset = useAction((state) => state.updateSongPreset)
 	const songDetails = useAction((state) => state.songDetails)
 	const addToPlaylist = useAction((state) => state.addToPlaylist)
 	const playlist = useAction((state) => state.playlist)
 
-	useEffect(() => {
-		console.log(playlist)
-	}, [playlist])
+	const handleSubmit = (e: any) => {
+		e.preventDefault()
+		setDialog(!dialog)
+	}
 
 	return (
-		<div className={'h-full w-1/5 border-r border-primary bg-background'}>
+		<form
+			className={'h-full w-1/5 border-r border-primary bg-background'}
+			onSubmit={(e) => handleSubmit(e)}
+		>
+			{dialog && (
+				<Details songDetails={songDetails} close={() => setDialog(!dialog)} />
+			)}
 			<div
 				className={
 					'flex size-auto items-center gap-6 border-b-2 border-primary p-2 px-4 text-primary'
@@ -49,27 +48,20 @@ const Sidebar = () => {
 					</Label>
 				</div>
 
-				<Dialog>
-					<DialogTrigger
-						className={'rounded-md bg-primary p-2 text-primary-foreground'}
+				<section className={'flex gap-2'}>
+					<Button
+						className={'w-full'}
+						variant={'outline'}
+						onClick={() => console.log('Playlist')}
 					>
+						Playlist
+					</Button>
+					<Button type={'submit'} className={'w-full'}>
 						Submit
-					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>Song Details</DialogHeader>
-						<DialogDescription className={'flex flex-col gap-2'}>
-							<span className={'text-primary'}>
-								Name: <span className={'font-medium'}>{songDetails.name}</span>
-							</span>
-						</DialogDescription>
-						<DialogFooter>
-							<Button>Cancel</Button>
-							<Button onClick={() => addToPlaylist()}>Submit</Button>
-						</DialogFooter>
-					</DialogContent>
-				</Dialog>
+					</Button>
+				</section>
 			</div>
-		</div>
+		</form>
 	)
 }
 
