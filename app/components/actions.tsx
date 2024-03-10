@@ -6,10 +6,10 @@ export const details = [
 		component: <TextField label={'Name'} type={'string'} model={'name'} />,
 	},
 	{
-		component: <UploadInput label={'Picture'} model={'image'} />,
+		component: <UploadInput label={'Picture'} model={'image'} type={'webp'} />,
 	},
 	{
-		component: <UploadInput label={'Music'} type={'file'} model={'music'} />,
+		component: <UploadInput label={'Music'} model={'music'} type={'mp3'} />,
 	},
 	{
 		component: <ColorInput label={'Background Color'} model={'background'} />,

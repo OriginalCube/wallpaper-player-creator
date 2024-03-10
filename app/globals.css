@@ -1,42 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer base {
+  :root {
+    --gradient: linear-gradient(to top left,#1CD8D2,#93EDC7);
 
-.theme-custom {
-    /* Name: custom color palette
-       Author: Ilias Ism
-       URL: https://gradient.page */
+    --background: 189 50.050000000000004% 3.84%;
+    --foreground: 189 7.7% 97.4%;
 
-    /* CSS: .bg-gradient { background: var(--gradient) } */
-    --gradient: linear-gradient(to top left, #4776E6, #8E54E9);
+    --muted: 189 38.5% 14.399999999999999%;
+    --muted-foreground: 189 7.7% 54.8%;
 
-    --background: 218 65% 4.48%;
-    --foreground: 218 10% 97.8%;
+    --popover: 189 49.6% 6.24%;
+    --popover-foreground: 189 7.7% 97.4%;
 
-    --muted: 218 50% 16.8%;
-    --muted-foreground: 218 10% 55.6%;
+    --card: 189 49.6% 6.24%;
+    --card-foreground: 189 7.7% 97.4%;
 
-    --popover: 218 45% 7.280000000000001%;
-    --popover-foreground: 218 10% 97.8%;
+    --border: 189 38.5% 14.399999999999999%;
+    --input: 189 38.5% 14.399999999999999%;
 
-    --card: 218 45% 7.280000000000001%;
-    --card-foreground: 218 10% 97.8%;
+    --primary: 189 77% 48%;
+    --primary-foreground: 189 7.7% 4.8%;
 
-    --border: 218 50% 16.8%;
-    --input: 218 50% 16.8%;
+    --secondary: 189 38.5% 14.399999999999999%;
+    --secondary-foreground: 189 7.7% 97.4%;
 
-    --primary: 218 100% 56%;
-    --primary-foreground: 218 10% 5.6000000000000005%;
-
-    --secondary: 218 50% 16.8%;
-    --secondary-foreground: 218 10% 97.8%;
-
-    --accent: 218 50% 16.8%;
-    --accent-foreground: 218 10% 97.8%;
+    --accent: 189 38.5% 14.399999999999999%;
+    --accent-foreground: 189 7.7% 97.4%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 218 10% 97.8%;
+    --destructive-foreground: 189 7.7% 97.4%;
 
-    --ring: 218 100% 56%;
-    --radius: .5rem;
+    --ring: 189 77% 48%;
+    --radius: 0.5rem;
+  }
+ 
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

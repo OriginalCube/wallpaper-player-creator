@@ -10,11 +10,14 @@ type State = {
 		foreground: string
 	}
 	songIndex: number
+	playlist: State['songDetails'][]
+	playlistId: number
 }
 
 type Action = {
 	changeSongDetail: (model: keyof State['songDetails'], value: string) => void
 	updateSongPreset: () => void
+	addToPlaylist: () => void
 }
 
 export const useAction = create<Action & State>((set) => ({
@@ -23,6 +26,8 @@ export const useAction = create<Action & State>((set) => ({
 		...SongPreset[0],
 		image: `/images/${SongPreset[0].name}.jpg`,
 	},
+	playlist: [],
+	playlistId: 0,
 
 	changeSongDetail: (model, value: string) =>
 		set((state) => ({
@@ -40,6 +45,16 @@ export const useAction = create<Action & State>((set) => ({
 				...SongPreset[state.songIndex],
 				image: `/images/${SongPreset[state.songIndex].name}.jpg`,
 				textColor: SongPreset[state.songIndex].foreground,
+			},
+		}))
+	},
+
+	addToPlaylist: () => {
+		set((state) => ({
+			playlist: [...state.playlist, state.songDetails],
+			songDetails: {
+				...SongPreset[state.songIndex],
+				image: `/images/${SongPreset[state.songIndex].name}.jpg`,
 			},
 		}))
 	},

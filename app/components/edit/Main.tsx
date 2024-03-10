@@ -9,14 +9,20 @@ import { useAction } from '@/app/lib/store/useAction'
 
 const Visualizer = () => {
 	const songDetails = useAction((state) => state.songDetails)
-	const height = Math.random() * 100
-	const width = 125 / 15
+	const [dimensions, setDimensions] = useState({ height: 0, width: 0 })
+
+	useEffect(() => {
+		const height = Math.random() * 100
+		const width = 125 / 15
+		setDimensions({ height: Math.floor(height), width: Math.floor(width) })
+	}, []) // Run only once on component mount
+
 	return (
 		<div
 			className={'bg-slate-400'}
 			style={{
-				height: height,
-				width: width,
+				height: dimensions.height,
+				width: dimensions.width,
 				backgroundColor: songDetails.foreground,
 			}}
 		></div>
@@ -28,12 +34,12 @@ const Main = () => {
 
 	const lines = []
 	for (let i = 0; i < 32; i++) {
-		lines.push(<Visualizer />)
+		lines.push(<Visualizer key={i} />)
 	}
 
 	return (
 		<div
-			className={'flex min-h-screen w-3/4 items-center justify-center'}
+			className={'flex min-h-screen w-4/5 items-center justify-center'}
 			style={{ background: songDetails.background }}
 		>
 			<div className={'flex h-full w-3/6 flex-col items-center pt-8'}>
@@ -47,6 +53,7 @@ const Main = () => {
 					src={songDetails?.image ?? ''}
 					alt={''}
 				/>
+
 				<div className={'flex h-1/6 w-[600px] items-center justify-center'}>
 					<div className={'flex h-auto w-full flex-col items-center gap-4'}>
 						<p

@@ -21,10 +21,7 @@ const Hovertip = ({ children, label, side }: HovertipProps) => {
 				<TooltipTrigger asChild className={'cursor-pointer'}>
 					{children}
 				</TooltipTrigger>
-				<TooltipContent
-					side={side ?? 'bottom'}
-					className={'border border-secondary'}
-				>
+				<TooltipContent side={side ?? 'bottom'}>
 					<Label>{label}</Label>
 				</TooltipContent>
 			</Tooltip>
