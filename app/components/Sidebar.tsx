@@ -4,19 +4,22 @@ import { SidebarActions } from '@/app/components/actions'
 import { Label } from '@/app/components/ui/label'
 import { useAction } from '@/app/lib/store/useAction'
 import { Button } from '@/app/components/ui/button'
-import Details from '@/app/components/Details'
-import { useState } from 'react'
+import { useModal } from '@/app/lib/store/useModal'
+import { toast } from 'sonner'
 
 const Sidebar = () => {
-	const [dialog, setDialog] = useState(false)
 	const changePreset = useAction((state) => state.updateSongPreset)
-	const songDetails = useAction((state) => state.songDetails)
-	const addToPlaylist = useAction((state) => state.addToPlaylist)
+	const openModal = useModal((state) => state.openModal)
 	const playlist = useAction((state) => state.playlist)
 
+	const openPlaylist = () => {
+		if (playlist.length > 0) openModal('playlist')
+		else toast('No songs added in the playlist yet.')
+	}
+
 	const handleSubmit = (e: any) => {
+		openModal('details')
 		e.preventDefault()
-		setDialog(!dialog)
 	}
 
 	return (
@@ -24,9 +27,6 @@ const Sidebar = () => {
 			className={'h-full w-1/5 border-r border-primary bg-background'}
 			onSubmit={(e) => handleSubmit(e)}
 		>
-			{dialog && (
-				<Details songDetails={songDetails} close={() => setDialog(!dialog)} />
-			)}
 			<div
 				className={
 					'flex size-auto items-center gap-6 border-b-2 border-primary p-2 px-4 text-primary'
@@ -51,8 +51,9 @@ const Sidebar = () => {
 				<section className={'flex gap-2'}>
 					<Button
 						className={'w-full'}
+						type={'button'}
 						variant={'outline'}
-						onClick={() => console.log('Playlist')}
+						onClick={openPlaylist}
 					>
 						Playlist
 					</Button>
