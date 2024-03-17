@@ -3,11 +3,18 @@ import { DialogDescription, DialogFooter } from '@/app/components/ui/dialog'
 import { Button } from '@/app/components/ui/button'
 import { useAction } from '@/app/lib/store/useAction'
 import { useModal } from '@/app/lib/store/useModal'
+import { toast } from 'sonner'
 
 const Details = () => {
 	const songDetails = useAction((state) => state.songDetails)
 	const addSong = useAction((state) => state.addToPlaylist)
 	const close = useModal((state) => state.closeModal)
+
+	const handleAddSong = () => {
+		addSong()
+		toast.success('Added song to the playlist.')
+		close()
+	}
 
 	return (
 		<>
@@ -26,7 +33,7 @@ const Details = () => {
 				<Button onClick={close} variant={'outline'}>
 					Close
 				</Button>
-				<Button onClick={addSong}>Add</Button>
+				<Button onClick={handleAddSong}>Add</Button>
 			</DialogFooter>
 		</>
 	)

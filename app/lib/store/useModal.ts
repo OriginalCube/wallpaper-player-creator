@@ -1,28 +1,29 @@
 import { create } from 'zustand'
 
 type State = {
-	active: boolean
-	modal: string | null
+	modal: string[]
+	data: object
 }
 
 type Action = {
 	openModal: (name: string) => void
 	closeModal: () => void
+	setData: (obj: Object) => void
 }
 
 export const useModal = create<State & Action>((set) => ({
-	active: false,
-	modal: null,
+	modal: [],
+	data: {},
 
 	openModal: (name) =>
-		set(() => ({
-			active: true,
-			modal: name,
+		set((state) => ({
+			modal: [...state.modal, name],
 		})),
 
 	closeModal: () =>
-		set(() => ({
-			active: false,
-			modal: null,
+		set((state) => ({
+			modal: state.modal.slice(0, -1),
 		})),
+
+	setData: (obj) => set(() => ({ data: obj })),
 }))

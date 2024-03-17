@@ -14,7 +14,7 @@ const Sidebar = () => {
 
 	const openPlaylist = () => {
 		if (playlist.length > 0) openModal('playlist')
-		else toast('No songs added in the playlist yet.')
+		else toast.warning('No songs added in the playlist yet.')
 	}
 
 	const handleSubmit = (e: any) => {
@@ -41,9 +41,10 @@ const Sidebar = () => {
 					className={
 						'flex cursor-pointer items-center justify-start gap-4 p-2 text-primary'
 					}
+					onClick={changePreset}
 				>
 					<Cog6ToothIcon className={'size-6'} />
-					<Label onClick={changePreset} className={'text-md text-primary'}>
+					<Label className={'text-md cursor-pointer text-primary'}>
 						Change Song Preset
 					</Label>
 				</div>

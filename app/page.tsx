@@ -6,7 +6,7 @@ export default function Home() {
 	return (
 		<main
 			className={
-				'theme-custom flex min-h-screen items-center justify-center gap-4'
+				'theme-custom flex min-h-screen items-center justify-center gap-4 bg-white text-black'
 			}
 		>
 			<div className={'flex w-1/2 flex-col gap-4'}>

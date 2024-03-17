@@ -11,6 +11,14 @@ import {
 	PopoverTrigger,
 } from '@/app/components/ui/popover'
 import { useAction } from '@/app/lib/store/useAction'
+import {
+	Dialog,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTrigger,
+} from '@/app/components/ui/dialog'
+import { Button } from '@/app/components/ui/button'
 
 type TextFieldProps = {
 	label: string
@@ -39,21 +47,26 @@ export const ColorInput = ({ label, model }: TextFieldProps) => {
 	return (
 		<div className={'flex items-center justify-start gap-4 p-2 text-primary'}>
 			<Popover>
-				<PopoverTrigger>
+				<PopoverTrigger className={'flex gap-4'}>
 					<Hovertip label={'Color Input'}>
 						<ArrowUpOnSquareIcon className={'size-6'} />
 					</Hovertip>
+					<Label className={'mx-1 cursor-pointer text-base '}>{label}</Label>
 				</PopoverTrigger>
-				<PopoverContent className={'size-auto border-none p-0'}>
+				<PopoverContent className={'size-auto border-none p-0'} side={'right'}>
 					<Sketch onChange={(e) => changeSongDetail(model, e.hex)} />
 				</PopoverContent>
 			</Popover>
-			<Label className={'mx-1 text-base'}>{label}</Label>
 		</div>
 	)
 }
 
-export const UploadInput = ({ label, model, type }: TextFieldProps) => {
+export const UploadInput = ({
+	label,
+	model,
+	type,
+	validation,
+}: TextFieldProps & { validation: string }) => {
 	const changeSongDetail = useAction((state) => state.changeSongDetail)
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
@@ -77,6 +90,7 @@ export const UploadInput = ({ label, model, type }: TextFieldProps) => {
 			<Label>{label}</Label>
 			<Input
 				type={'file'}
+				accept={validation}
 				onChange={(e) => handleFileInputChange(e)}
 				required
 			/>{' '}
