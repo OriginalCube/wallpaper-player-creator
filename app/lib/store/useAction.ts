@@ -18,6 +18,7 @@ type Action = {
 	changeSongDetail: (model: keyof State['songDetails'], value: string) => void
 	updateSongPreset: () => void
 	addToPlaylist: () => void
+	deleteFromPlaylist: (id: number) => void
 }
 
 export const useAction = create<Action & State>((set) => ({
@@ -56,6 +57,12 @@ export const useAction = create<Action & State>((set) => ({
 				...SongPreset[state.songIndex],
 				image: `/images/${SongPreset[state.songIndex].name}.jpg`,
 			},
+		}))
+	},
+
+	deleteFromPlaylist: (id) => {
+		set((state) => ({
+			playlist: state.playlist.filter((song, index) => index !== id),
 		}))
 	},
 }))

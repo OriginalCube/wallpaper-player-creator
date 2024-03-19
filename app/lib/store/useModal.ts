@@ -23,6 +23,7 @@ export const useModal = create<State & Action>((set) => ({
 	closeModal: () =>
 		set((state) => ({
 			modal: state.modal.slice(0, -1),
+			data: {},
 		})),
 
 	setData: (obj) => set(() => ({ data: obj })),

@@ -11,14 +11,6 @@ import {
 	PopoverTrigger,
 } from '@/app/components/ui/popover'
 import { useAction } from '@/app/lib/store/useAction'
-import {
-	Dialog,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTrigger,
-} from '@/app/components/ui/dialog'
-import { Button } from '@/app/components/ui/button'
 
 type TextFieldProps = {
 	label: string
@@ -68,6 +60,7 @@ export const UploadInput = ({
 	validation,
 }: TextFieldProps & { validation: string }) => {
 	const changeSongDetail = useAction((state) => state.changeSongDetail)
+	const songDetails = useAction((state) => state.songDetails)
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
