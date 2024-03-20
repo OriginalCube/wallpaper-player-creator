@@ -15,15 +15,20 @@ const Playlist = () => {
 	const playlist = useAction((state) => state.playlist)
 	const openModal = useModal((state) => state.openModal)
 	const close = useModal((state) => state.closeModal)
+	const resetModal = useModal((state) => state.resetModal)
 	const setData = useModal((state) => state.setData)
 	const deleteFromPlaylist = useAction((state) => state.deleteFromPlaylist)
+	const editSongDetails = useAction((state) => state.editSongDetails)
 
 	const editSong = (id: number) => {
 		setData({
 			message:
 				'Are you sure you want to continue? This will result in losing the current state.',
 			close: close,
-			action: () => console.log('hello world'),
+			action: () => {
+				editSongDetails(id)
+				resetModal()
+			},
 		})
 		openModal('confirm')
 	}

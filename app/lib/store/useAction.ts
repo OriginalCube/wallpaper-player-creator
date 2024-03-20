@@ -19,6 +19,7 @@ type Action = {
 	updateSongPreset: () => void
 	addToPlaylist: () => void
 	deleteFromPlaylist: (id: number) => void
+	editSongDetails: (id: number) => void
 }
 
 export const useAction = create<Action & State>((set) => ({
@@ -49,6 +50,11 @@ export const useAction = create<Action & State>((set) => ({
 			},
 		}))
 	},
+
+	editSongDetails: (id) =>
+		set((state) => ({
+			songDetails: { ...state.playlist[id] },
+		})),
 
 	addToPlaylist: () => {
 		set((state) => ({

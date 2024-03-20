@@ -9,6 +9,7 @@ type Action = {
 	openModal: (name: string) => void
 	closeModal: () => void
 	setData: (obj: Object) => void
+	resetModal: () => void
 }
 
 export const useModal = create<State & Action>((set) => ({
@@ -25,6 +26,8 @@ export const useModal = create<State & Action>((set) => ({
 			modal: state.modal.slice(0, -1),
 			data: {},
 		})),
+
+	resetModal: () => ({ modal: [] }),
 
 	setData: (obj) => set(() => ({ data: obj })),
 }))
