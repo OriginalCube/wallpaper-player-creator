@@ -9,10 +9,19 @@ const Details = () => {
 	const songDetails = useAction((state) => state.songDetails)
 	const addSong = useAction((state) => state.addToPlaylist)
 	const close = useModal((state) => state.closeModal)
+	const editId = useAction((state) => state.editId)
+	const updateEdit = useAction((state) => state.updateEdit)
 
 	const handleAddSong = () => {
-		addSong()
-		toast.success('Added song to the playlist.')
+		let action
+		if (editId === null || editId === undefined) {
+			addSong()
+			action = 'Added'
+		} else {
+			updateEdit(editId)
+			action = 'Updated'
+		}
+		toast.success(`${action} song to the playlist.`)
 		close()
 	}
 

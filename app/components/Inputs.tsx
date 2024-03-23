@@ -20,12 +20,14 @@ type TextFieldProps = {
 
 export const TextField = ({ label, type, model }: TextFieldProps) => {
 	const changeSongDetail = useAction((state) => state.changeSongDetail)
+	const songDetails = useAction((state) => state.songDetails)
 	return (
 		<div className={'flex flex-col gap-2 text-primary'}>
 			<Label>{label}</Label>
 			<Input
 				type={type}
 				required
+				value={songDetails[model]}
 				onChange={(e) => {
 					changeSongDetail(model, e.target.value)
 				}}
@@ -60,7 +62,6 @@ export const UploadInput = ({
 	validation,
 }: TextFieldProps & { validation: string }) => {
 	const changeSongDetail = useAction((state) => state.changeSongDetail)
-	const songDetails = useAction((state) => state.songDetails)
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
@@ -85,7 +86,6 @@ export const UploadInput = ({
 				type={'file'}
 				accept={validation}
 				onChange={(e) => handleFileInputChange(e)}
-				required
 			/>{' '}
 		</div>
 	)

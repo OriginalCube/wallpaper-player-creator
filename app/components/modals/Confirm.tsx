@@ -12,6 +12,12 @@ const Confirm = () => {
 	const { message, action, actionName, close } = useModal(
 		(state) => state.data,
 	) as Confirm
+	const closeModal = useModal((state) => state.closeModal)
+
+	const handleAction = () => {
+		action()
+		closeModal()
+	}
 	return (
 		<>
 			<DialogHeader>Confirm</DialogHeader>
@@ -20,7 +26,7 @@ const Confirm = () => {
 				<Button onClick={close} variant={'outline'}>
 					Close
 				</Button>
-				<Button onClick={action}>{actionName ?? 'Confirm'}</Button>
+				<Button onClick={handleAction}>{actionName ?? 'Confirm'}</Button>
 			</DialogFooter>
 		</>
 	)
