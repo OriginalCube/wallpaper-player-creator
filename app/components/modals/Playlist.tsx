@@ -28,6 +28,7 @@ const Playlist = () => {
 			action: () => {
 				editSongDetails(id)
 				resetModal()
+				toast.success(`Currently editing song ${id + 1}`)
 			},
 		})
 		openModal('confirm')

@@ -85,6 +85,7 @@ export const UploadInput = ({
 			<Input
 				type={'file'}
 				accept={validation}
+				required
 				onChange={(e) => handleFileInputChange(e)}
 			/>{' '}
 		</div>

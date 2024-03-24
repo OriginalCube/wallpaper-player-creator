@@ -6,6 +6,7 @@ import { useAction } from '@/app/lib/store/useAction'
 import { Button } from '@/app/components/ui/button'
 import { useModal } from '@/app/lib/store/useModal'
 import { toast } from 'sonner'
+import { download } from '@/app/lib/useDownload'
 
 const Sidebar = () => {
 	const changePreset = useAction((state) => state.updateSongPreset)
@@ -20,6 +21,15 @@ const Sidebar = () => {
 	const handleSubmit = (e: any) => {
 		openModal('details')
 		e.preventDefault()
+	}
+
+	const handleDownload = () => {
+		if (playlist.length === 0) {
+			toast.warning('No songs added yet in the playlist!')
+			return
+		}
+
+		download(playlist)
 	}
 
 	return (
@@ -52,16 +62,16 @@ const Sidebar = () => {
 				<section className={'flex gap-2'}>
 					<Button
 						className={'w-full'}
-						type={'button'}
 						variant={'outline'}
 						onClick={openPlaylist}
 					>
 						Playlist
 					</Button>
-					<Button type={'submit'} className={'w-full'}>
+					<Button type={'submit'} variant={'outline'} className={'w-full'}>
 						Submit
 					</Button>
 				</section>
+				<Button onClick={handleDownload}>Download</Button>
 			</div>
 		</form>
 	)
