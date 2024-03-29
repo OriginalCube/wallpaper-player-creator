@@ -30,6 +30,7 @@ const Sidebar = () => {
 		}
 
 		download(playlist)
+		toast.success('Songs downloaded!')
 	}
 
 	return (
@@ -71,7 +72,9 @@ const Sidebar = () => {
 						Submit
 					</Button>
 				</section>
-				<Button onClick={handleDownload}>Download</Button>
+				<Button onClick={handleDownload} type={'button'}>
+					Download
+				</Button>
 			</div>
 		</form>
 	)
