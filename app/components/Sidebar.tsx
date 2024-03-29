@@ -64,6 +64,7 @@ const Sidebar = () => {
 					<Button
 						className={'w-full'}
 						variant={'outline'}
+						type={'button'}
 						onClick={openPlaylist}
 					>
 						Playlist
