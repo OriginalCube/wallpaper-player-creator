@@ -23,13 +23,13 @@ const Sidebar = () => {
 		e.preventDefault()
 	}
 
-	const handleDownload = () => {
+	const handleDownload = async () => {
 		if (playlist.length === 0) {
 			toast.warning('No songs added yet in the playlist!')
 			return
 		}
 
-		download(playlist)
+		await download(playlist)
 		toast.success('Songs downloaded!')
 	}
 

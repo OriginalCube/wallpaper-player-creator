@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import { Button } from '@/app/components/ui/button'
 import Link from 'next/link'
+import { GitHubLogoIcon } from '@radix-ui/react-icons'
+import { HeartIcon } from '@heroicons/react/24/solid'
+import { FolderPlusIcon } from '@heroicons/react/24/solid'
 
 export default function Home() {
 	return (
@@ -17,20 +20,28 @@ export default function Home() {
 					issue in Github and let me know about it.
 				</p>
 				<div className={'mt-4 flex items-center justify-evenly'}>
-					<a
-						target={'_blank'}
-						href={'https://github.com/OriginalCube/WE-custom-player'}
-					>
-						<Button className={'text-white'}>Contribute</Button>
-					</a>
-					<a
+					<Link
 						target={'_blank'}
 						href={'https://steamcommunity.com/id/OriginalCube/myworkshopfiles/'}
 					>
-						<Button className={'text-white'}>Steam Workshop</Button>
-					</a>
+						<Button className={'text-white'}>
+							<HeartIcon className={'mr-2 size-4'} /> Donate
+						</Button>
+					</Link>
+					<Link
+						target={'_blank'}
+						href={'https://github.com/OriginalCube/WE-custom-player'}
+					>
+						<Button className={'text-white'}>
+							<GitHubLogoIcon className={'mr-2 size-4'} />
+							Contribute
+						</Button>
+					</Link>
 					<Link key={'edit'} href={'/edit'}>
-						<Button className={'text-white'}>Start Creating Now</Button>
+						<Button className={'text-white'}>
+							<FolderPlusIcon className={'mr-2 size-4'} />
+							Start Creating Now
+						</Button>
 					</Link>
 				</div>
 			</div>
