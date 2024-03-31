@@ -63,3 +63,23 @@ body {
 .lower-volume {
     transform: rotate(180deg);
 }
+
+.settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    animation: boxTurn 9s infinite;
+}
+
+@keyframes boxTurn {
+    50% {
+        transform: rotate(180deg);
+    }
+}
+
+@media (max-width: 1366px) {
+    .playlist {
+        margin-top: 12px;
+        gap: 4px;
+    }
+}

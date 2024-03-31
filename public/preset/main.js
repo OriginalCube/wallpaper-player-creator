@@ -2,6 +2,7 @@ var audio = document.createElement('audio')
 var index = 0
 var volume = 0.5
 var foreground = ''
+var wallpapaerActive = true
 
 loadSong()
 
@@ -30,14 +31,14 @@ async function loadSong(next = true) {
         }
 
         // Set the simple data
-        document.getElementById('image').src = data[index].image // Assuming data.image contains the base64-encoded image data
+        document.getElementById('image').src = './images/' + data[index].name// Assuming data.image contains the base64-encoded image data
         document.getElementById('background').style.backgroundColor =
             data[index].background
         document.getElementById('name').textContent = data[index].name
         foreground = data[index].foreground
 
         // Set the audio
-        audio.src = data[index].music
+        audio.src = './songs/' + data[index].name
         audio.controls = true
         audio.volume = volume
 
@@ -77,6 +78,17 @@ function pauseAudio() {
     audio.pause()
     document.getElementById('pause').style.display = 'none'
     document.getElementById('play').style.display = 'block'
+}
+
+function disable() {
+    if (wallpapaerActive) {
+        audio.pause()
+        document.getElementById('playlist').style.visibility = 'hidden'
+    } else {
+        audio.play()
+        document.getElementById('playlist').style.visibility = 'visible'
+    }
+    wallpapaerActive = !wallpapaerActive
 }
 
 function adjustVolume(increase = true) {
