@@ -7,7 +7,16 @@ import { Button } from '@/app/components/ui/button'
 import { useModal } from '@/app/lib/store/useModal'
 import { toast } from 'sonner'
 import { download } from '@/app/lib/useDownload'
-import { useEffect } from 'react'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+} from '@/app/components/ui/card'
+import { HeartIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import Hovertip from '@/app/components/Hovertip'
 
 const Sidebar = () => {
 	const changePreset = useAction((state) => state.updateSongPreset)
@@ -41,10 +50,6 @@ const Sidebar = () => {
 				'There has been an error downloading your file, please try again.',
 			)
 	}
-
-	useEffect(() => {
-		console.log(playlist)
-	}, [playlist])
 
 	return (
 		<form
@@ -90,6 +95,25 @@ const Sidebar = () => {
 					Download
 				</Button>
 			</div>
+			<Card className={'m-2'}>
+				<CardHeader>Important notes Ver(1.0):</CardHeader>
+				<CardContent>
+					<CardDescription>
+						Note: All image types are accepted and will be converted. Only MP3
+						files are allowed for audio/music uploads. Double-check successful
+						uploads before adding the preset. Each song name must be unique.
+					</CardDescription>
+				</CardContent>
+				<CardFooter className={'flex items-center justify-end'}>
+					<Hovertip label={'Onegai ( ੭•͈ω•͈)੭'}>
+						<Link target={'_blank'} href={'https://ko-fi.com/originalcube'}>
+							<Button type={'button'}>
+								<HeartIcon className={'mr-2 size-4'} /> Donate
+							</Button>
+						</Link>
+					</Hovertip>
+				</CardFooter>
+			</Card>
 		</form>
 	)
 }

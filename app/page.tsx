@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
 import { HeartIcon } from '@heroicons/react/24/solid'
 import { FolderPlusIcon } from '@heroicons/react/24/solid'
+import React from 'react'
 
 export default function Home() {
 	return (
@@ -13,17 +14,16 @@ export default function Home() {
 			}
 		>
 			<div className={'flex w-1/2 flex-col gap-4'}>
-				<p className={'text-7xl font-medium '}>Wallpaper Creator v1.0</p>
-				<p className={'w-11/12 text-2xl font-light leading-10'}>
+				<p className={'text-7xl font-medium text-primary'}>
+					Wallpaper Creator v1.0
+				</p>
+				<p className={'w-11/12 text-2xl font-light leading-10 text-secondary'}>
 					Start creating custom wallpaper now! This is still in a beta version
 					so changes or bugs can appear. If those issue occurs please create an
 					issue in Github and let me know about it.
 				</p>
 				<div className={'mt-4 flex items-center justify-evenly'}>
-					<Link
-						target={'_blank'}
-						href={'https://steamcommunity.com/id/OriginalCube/myworkshopfiles/'}
-					>
+					<Link target={'_blank'} href={'https://ko-fi.com/originalcube'}>
 						<Button className={'text-white'}>
 							<HeartIcon className={'mr-2 size-4'} /> Donate
 						</Button>

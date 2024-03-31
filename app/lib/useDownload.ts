@@ -8,6 +8,7 @@ export const download = async (
 	const jsZip = new JSZip()
 
 	const imagesFolder = jsZip.folder('images')
+	const songsFolder = jsZip.folder('songs')
 	jsZip.file('songData.json', songDetails)
 
 	try {
@@ -17,8 +18,9 @@ export const download = async (
 
 			const dataURL = `data:${song.music.type};base64,${Buffer.from(imageBlob).toString('base64')}`
 			const webpDataURL = await convertToWebP(dataURL)
-			console.log(song)
 			imagesFolder?.file(song.name, webpDataURL.split(',')[1], { base64: true })
+
+			songsFolder?.file(song.name, song.music)
 		}
 
 		// Fetch html preset

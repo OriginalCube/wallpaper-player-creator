@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/app/components/ui/sonner'
 import React from 'react'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<div className={'theme-custom'}>
+					<Head>
+						<title>Wallpaper Creator</title>
+					</Head>
 					{children}
 					<Toaster />
 				</div>
