@@ -7,22 +7,12 @@ export const details = [
 	},
 	{
 		component: (
-			<UploadInput
-				label={'Picture'}
-				model={'image'}
-				type={'webp'}
-				validation={'image/*'}
-			/>
+			<UploadInput label={'Picture'} model={'image'} validation={'image/*'} />
 		),
 	},
 	{
 		component: (
-			<UploadInput
-				label={'Music'}
-				model={'music'}
-				type={'mp3'}
-				validation={'audio/*'}
-			/>
+			<UploadInput label={'Music'} model={'music'} validation={'audio/mpeg'} />
 		),
 	},
 	{

@@ -4,8 +4,8 @@ import SongPreset from '@/app/lib/SongData.json'
 export type State = {
 	songDetails: {
 		name: string
-		image?: string
-		music?: string
+		image: File | string
+		music?: File | string
 		background: string
 		foreground: string
 	}
@@ -16,12 +16,16 @@ export type State = {
 }
 
 type Action = {
-	changeSongDetail: (model: keyof State['songDetails'], value: string) => void
+	changeSongDetail: (
+		model: keyof State['songDetails'],
+		value: string | File,
+	) => void
 	updateSongPreset: () => void
 	addToPlaylist: () => void
 	deleteFromPlaylist: (id: number) => void
 	editSongDetails: (id: number) => void
 	updateEdit: (id: number) => void
+	resetPlaylist: () => void
 }
 
 export const useAction = create<Action & State>((set) => ({
@@ -34,7 +38,7 @@ export const useAction = create<Action & State>((set) => ({
 	playlistId: 0,
 	editId: undefined,
 
-	changeSongDetail: (model, value: string) =>
+	changeSongDetail: (model, value) =>
 		set((state) => ({
 			songDetails: {
 				...state.songDetails,
@@ -88,6 +92,12 @@ export const useAction = create<Action & State>((set) => ({
 	deleteFromPlaylist: (id) => {
 		set((state) => ({
 			playlist: state.playlist.filter((song, index) => index !== id),
+		}))
+	},
+
+	resetPlaylist: () => {
+		set((state) => ({
+			playlist: [],
 		}))
 	},
 }))

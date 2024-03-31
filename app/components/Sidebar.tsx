@@ -7,11 +7,13 @@ import { Button } from '@/app/components/ui/button'
 import { useModal } from '@/app/lib/store/useModal'
 import { toast } from 'sonner'
 import { download } from '@/app/lib/useDownload'
+import { useEffect } from 'react'
 
 const Sidebar = () => {
 	const changePreset = useAction((state) => state.updateSongPreset)
 	const openModal = useModal((state) => state.openModal)
 	const playlist = useAction((state) => state.playlist)
+	const resetPlaylist = useAction((state) => state.resetPlaylist)
 
 	const openPlaylist = () => {
 		if (playlist.length > 0) openModal('playlist')
@@ -29,9 +31,20 @@ const Sidebar = () => {
 			return
 		}
 
-		await download(playlist)
-		toast.success('Songs downloaded!')
+		// @ts-ignore *-*
+		const result = await download(playlist)
+		if (result) {
+			toast.success('Songs downloaded!')
+			resetPlaylist()
+		} else
+			toast.warning(
+				'There has been an error downloading your file, please try again.',
+			)
 	}
+
+	useEffect(() => {
+		console.log(playlist)
+	}, [playlist])
 
 	return (
 		<form

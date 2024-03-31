@@ -27,7 +27,7 @@ export const TextField = ({ label, type, model }: TextFieldProps) => {
 			<Input
 				type={type}
 				required
-				value={songDetails[model]}
+				value={songDetails[model] as string}
 				onChange={(e) => {
 					changeSongDetail(model, e.target.value)
 				}}
@@ -58,24 +58,13 @@ export const ColorInput = ({ label, model }: TextFieldProps) => {
 export const UploadInput = ({
 	label,
 	model,
-	type,
 	validation,
 }: TextFieldProps & { validation: string }) => {
 	const changeSongDetail = useAction((state) => state.changeSongDetail)
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0]
 		if (file) {
-			const reader = new FileReader()
-			reader.onloadend = () => {
-				const base64String = reader.result?.toString().split(',')[1]
-				if (base64String) {
-					changeSongDetail(
-						model,
-						`data:${type === 'webp' ? 'image' : 'audio'}/${type};base64,${base64String}`,
-					)
-				}
-			}
-			reader.readAsDataURL(file)
+			changeSongDetail(model, file)
 		}
 	}
 

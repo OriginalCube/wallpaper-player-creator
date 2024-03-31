@@ -6,6 +6,7 @@ import { HeartIcon } from '@heroicons/react/24/outline'
 import { LoopIcon } from '@radix-ui/react-icons'
 import { Slider } from '@/app/components/ui/slider'
 import { useAction } from '@/app/lib/store/useAction'
+import { isFile } from '@/app/lib/helpers'
 
 const Visualizer = () => {
 	const songDetails = useAction((state) => state.songDetails)
@@ -31,11 +32,25 @@ const Visualizer = () => {
 
 const Main = () => {
 	const songDetails = useAction((state) => state.songDetails)
+	const [image, setImage] = useState('')
 
 	const lines = []
 	for (let i = 0; i < 32; i++) {
 		lines.push(<Visualizer key={i} />)
 	}
+
+	useEffect(() => {
+		if (!(typeof songDetails.image === 'string')) {
+			if (songDetails.image) {
+				const reader = new FileReader()
+				reader.onload = () => {
+					const result = reader.result as string | null
+					if (result) setImage(result)
+				}
+				reader.readAsDataURL(songDetails.image)
+			}
+		} else setImage(songDetails.image)
+	}, [songDetails])
 
 	return (
 		<div
@@ -50,7 +65,7 @@ const Main = () => {
 					width={600}
 					height={600}
 					className={'size-[600px] object-cover'}
-					src={songDetails?.image ?? ''}
+					src={image}
 					alt={''}
 				/>
 
