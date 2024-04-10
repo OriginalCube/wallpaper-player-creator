@@ -29,14 +29,16 @@ body {
 }
 
 .image {
+    border-radius: 12px;
     width: 35vw;
     height: 35vw;
     object-fit: fill;
+    box-shadow: white 0px 0px 8px;
 }
 
-.playlist {
+#player {
     height: 15%;
-    width: 100%;
+    width: 80%;
     margin-top: 32px;
     display: flex;
     flex-direction: column;
@@ -45,7 +47,7 @@ body {
     gap: 12px;
 }
 
-.playlist-container {
+.player-container {
     display: flex;
     align-items: center;
     justify-items: center;
@@ -68,7 +70,18 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
+}
+
+.main-setting {
     animation: boxTurn 9s infinite;
+}
+
+#settings-option {
+    visibility: hidden;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 @keyframes boxTurn {
@@ -77,8 +90,35 @@ body {
     }
 }
 
+#playlist {
+    padding: 16px;
+    visibility: hidden;
+    position: absolute;
+    overflow: hidden;
+    top: 20vh;
+    left: 8vw;
+    width: 20vw;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .2);
+}
+
+#playlist-container {
+    padding: 12px;
+    max-height: 60vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+}
+
+#playlist-container p:hover {
+    cursor: pointer; /* Show pointer cursor on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
 @media (max-width: 1366px) {
-    .playlist {
+    .player {
         margin-top: 12px;
         gap: 4px;
     }

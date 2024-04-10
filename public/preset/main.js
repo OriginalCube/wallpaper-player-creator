@@ -1,68 +1,113 @@
 var audio = document.createElement('audio')
 var index = 0
-var volume = 0.5
+var volume = localStorage.getItem('custom-player-volume') ? JSON.parse(localStorage.getItem('custom-player-volume')) : 0.5
 var foreground = ''
-var wallpapaerActive = true
+var wallpaperActive = true
+var settings = false
+var songData = []
+var playlist = localStorage.getItem('custom-player-playlist') ? JSON.parse(localStorage.getItem('custom-player-playlist')) : false
 
-loadSong()
+loadApplication()
 
-async function loadSong(next = true) {
-    try {
-        const response = await fetch('songData.json')
+async function loadApplication() {
+    await fetchSongData()
+    await loadSong()
+    updatePlaylist()
+}
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok')
-        }
+function updatePlaylist() {
+    if (songData.length <= 0) return
 
-        const data = await response.json()
-
-        if (next && audio.paused) {
-            if (index + 1 > data.length - 1) {
-                index = 0
-            } else {
-                index++
-            }
-        } else {
-            if (index - 1 < 0) {
-                index = data.length - 1
-            } else {
-                index--
-            }
-        }
-
-        // Set the simple data
-        document.getElementById('image').src = './images/' + data[index].name// Assuming data.image contains the base64-encoded image data
-        document.getElementById('background').style.backgroundColor =
-            data[index].background
-        document.getElementById('name').textContent = data[index].name
-        foreground = data[index].foreground
-
-        // Set the audio
-        audio.src = './songs/' + data[index].name
-        audio.controls = true
-        audio.volume = volume
-
-        const slider = document.getElementById('slider')
-        slider.addEventListener('input', function () {
-            // Update the current time of the audio element when slider is adjusted
-            audio.currentTime = this.value
+    for (const [songIndex, songInfo] of songData.entries()) {
+        const p = document.createElement('p');
+        p.textContent = `${songIndex + 1}. ${songInfo.name}`
+        p.addEventListener('click', () => {
+            loadSong(true, songIndex)
         })
-
-        audio.addEventListener('loadedmetadata', function () {
-            // Set the maximum value of the slider to the duration of the audio
-            slider.max = audio.duration
-        })
-
-        // Update the slider value as the audio plays
-        audio.addEventListener('timeupdate', function () {
-            document.getElementById('slider').value = this.currentTime
-        })
-
-        await playAudio()
-    } catch (error) {
-        console.error('There was a problem with your fetch operation:', error)
+        document.getElementById('playlist-container').appendChild(p)
     }
 }
+
+async function fetchSongData() {
+    try {
+        const response = await fetch('songData.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        songData = await response.json(); // Store the JSON response globally
+    } catch (error) {
+        console.error('Failed to fetch song data:', error);
+    }
+}
+
+async function loadSong(next = true, changeSong) {
+    try {
+        const data = songData
+
+        // Update index based on next flag
+        if (changeSong === undefined) {
+            index = next ? (index + 1) % data.length : (index - 1 + data.length) % data.length;
+        } else {
+            index = changeSong
+        }
+
+        const currentSong = data[index];
+
+        // Update visual elements
+        foreground = currentSong.foreground
+        updateImage(currentSong);
+        updateBackground(currentSong);
+        updateName(currentSong);
+        updatePlaylistColors(currentSong)
+        togglePlaylist(true)
+
+        // Set audio properties and events
+        audio.src = `./songs/${currentSong.name}`;
+        audio.controls = true;
+        audio.volume = volume;
+
+        initializeSlider();
+
+        await playAudio();
+    } catch (error) {
+        console.error('There was a problem with your operation:', error);
+    }
+}
+
+function updateImage(song) {
+    const imageElement = document.getElementById('image');
+    imageElement.src = `./images/${song.name}`;
+    imageElement.style.boxShadow = `0px 0px 12px ${song.foreground}`;
+}
+
+function updateBackground(song) {
+    document.getElementById('background').style.backgroundColor = song.background;
+}
+
+function updateName(song) {
+    document.getElementById('name').textContent = song.name;
+}
+
+function updatePlaylistColors(song) {
+    document.getElementById('playlist').style.boxShadow = `0px 0px 4px ${song.foreground}`
+}
+
+function initializeSlider() {
+    const slider = document.getElementById('slider');
+
+    slider.addEventListener('input', () => {
+        audio.currentTime = slider.value;
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        slider.max = audio.duration;
+    });
+
+    audio.addEventListener('timeupdate', () => {
+        slider.value = audio.currentTime;
+    });
+}
+
 
 audio.addEventListener('ended', async function () {
     await loadSong(true)
@@ -80,15 +125,26 @@ function pauseAudio() {
     document.getElementById('play').style.display = 'block'
 }
 
+function enableSettings() {
+    settings = !settings
+    document.getElementById('settings-option').style.visibility = settings ? 'visible' : 'hidden'
+}
+
 function disable() {
-    if (wallpapaerActive) {
+    if (wallpaperActive) {
         audio.pause()
-        document.getElementById('playlist').style.visibility = 'hidden'
+        document.getElementById('player').style.visibility = 'hidden'
     } else {
         audio.play()
-        document.getElementById('playlist').style.visibility = 'visible'
+        document.getElementById('player').style.visibility = 'visible'
     }
-    wallpapaerActive = !wallpapaerActive
+    wallpaperActive = !wallpaperActive
+}
+
+function togglePlaylist(onLoad = false) {
+    if (!onLoad) playlist = !playlist
+    document.getElementById('playlist').style.visibility = playlist ? 'visible' : 'hidden'
+    localStorage.setItem('custom-player-playlist', playlist)
 }
 
 function adjustVolume(increase = true) {
@@ -102,13 +158,14 @@ function adjustVolume(increase = true) {
             volume -= 0.1
             audio.volume = volume
         } else {
-            audio.volume = 0
+            volume = 0
+            audio.volume = volume
         }
     }
+    localStorage.setItem('custom-player-volume', volume)
 }
 
 // Wallpaper engine settings
-
 let canvas = document.getElementById('AudioCanvas')
 canvas.width = window.innerWidth * .35
 canvas.height = window.innerHeight * .15
