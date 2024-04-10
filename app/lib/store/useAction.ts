@@ -8,6 +8,8 @@ export type State = {
 		music?: File | string
 		background: string
 		foreground: string
+		textColor?: string
+		playlist?: object
 	}
 	editId?: number | null
 	songIndex: number
