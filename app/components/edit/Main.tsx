@@ -33,6 +33,7 @@ const Visualizer = () => {
 const Main = () => {
 	const songDetails = useAction((state) => state.songDetails)
 	const [image, setImage] = useState('')
+	const [isSmallDevice, setIsSmallDevice] = useState(false)
 
 	const lines = []
 	for (let i = 0; i < 32; i++) {
@@ -40,6 +41,7 @@ const Main = () => {
 	}
 
 	useEffect(() => {
+		if (window.innerHeight < 900) setIsSmallDevice(true)
 		if (!(typeof songDetails.image === 'string')) {
 			if (songDetails.image) {
 				const reader = new FileReader()
@@ -58,13 +60,16 @@ const Main = () => {
 			style={{ background: songDetails.background }}
 		>
 			<div className={'flex h-full w-3/6 flex-col items-center pt-8'}>
-				<div className={'flex h-[125px] w-[600px] items-end justify-between'}>
+				<div
+					className={'flex h-[125px] items-end justify-between'}
+					style={{ width: isSmallDevice ? '450px' : '600px' }}
+				>
 					{lines}
 				</div>
 				<Image
-					width={600}
-					height={600}
-					className={'size-[600px] object-cover'}
+					width={isSmallDevice ? 450 : 600}
+					height={isSmallDevice ? 450 : 600}
+					className={'object-cover'}
 					src={image}
 					alt={''}
 				/>

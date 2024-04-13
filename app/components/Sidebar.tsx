@@ -53,7 +53,9 @@ const Sidebar = () => {
 
 	return (
 		<form
-			className={'h-full w-1/5 border-r border-primary bg-background'}
+			className={
+				'h-full w-1/5 overflow-y-auto border-r border-primary bg-background'
+			}
 			onSubmit={(e) => handleSubmit(e)}
 		>
 			<div
@@ -62,7 +64,7 @@ const Sidebar = () => {
 				}
 			>
 				<CodeBracketIcon className={'h-10 w-10'} />
-				<p className={'text-2xl font-medium'}>Wallpaper Creator</p>
+				<Label className={'text-xl font-medium'}>Wallpaper Creator</Label>
 			</div>
 			<div className={'flex flex-col gap-4 p-4'}>
 				<SidebarActions />
